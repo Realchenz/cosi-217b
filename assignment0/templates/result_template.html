@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <h1>Entities:</h1>
+    <ul>
+        {% for entity in entities %}
+            <li>{{ entity.text }} ({{ entity.label }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Nouns:</h1>
+    <ul>
+        {% for noun in nouns %}
+            <li>{{ noun.text }} ({{ noun.label }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
