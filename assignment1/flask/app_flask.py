@@ -12,23 +12,23 @@ import ner
 app = Flask(__name__)
 
 
-# For the website we use the regular Flask functionality and serve up HTML pages.
+# # For the website we use the regular Flask functionality and serve up HTML pages.
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'GET':
-        return render_template('form.html', input=open('input.txt').read())
-    else:
-        text = request.form['text']
-        doc = ner.SpacyDocument(text)
-        markup = doc.get_entities_with_markup()
-        markup_paragraphed = ''
-        for line in markup.split('\n'):
-            if line.strip() == '':
-                markup_paragraphed += '<p/>\n'
-            else:
-                markup_paragraphed += line
-        return render_template('result.html', markup=markup_paragraphed)
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     if request.method == 'GET':
+#         return render_template('form.html', input=open('input.txt').read())
+#     else:
+#         text = request.form['text']
+#         doc = ner.SpacyDocument(text)
+#         markup = doc.get_entities_with_markup()
+#         markup_paragraphed = ''
+#         for line in markup.split('\n'):
+#             if line.strip() == '':
+#                 markup_paragraphed += '<p/>\n'
+#             else:
+#                 markup_paragraphed += line
+#         return render_template('result.html', markup=markup_paragraphed)
 
 # alternative where we use two resources
 
@@ -47,8 +47,18 @@ def index_post():
             markup_paragraphed += '<p/>\n'
         else:
             markup_paragraphed += line
-    return render_template('result2.html', markup=markup_paragraphed)
 
+        text = request.form['text']
+        doc = ner.SpacyDocument(text)
+        
+    # Get the dependency relationships for each sentence
+    dependency_info = []
+    for sent in doc.doc.sents:
+        sent_text = sent.text
+        sent_dependencies = [(token.text, token.dep_, token.head.text) for token in sent]
+        dependency_info.append({'sentence': sent_text, 'dependencies': sent_dependencies})
+    
+    return render_template('result2.html', markup=markup_paragraphed, dependency_info=dependency_info)
 
 if __name__ == '__main__':
 

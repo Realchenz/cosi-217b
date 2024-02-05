@@ -14,6 +14,17 @@
       {{ markup | safe }}
     </div>
 
+    <div>
+      {% for info in dependency_info %}
+        <p>{{ info['sentence'] }}</p>
+        <ul>
+          {% for dep in info['dependencies'] %}
+            <li>{{ dep[0] }} {{ dep[1] }} {{ dep[2] }}</li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </div>
+
     <p><a href="/get">back to form</a></p>
 
   </body>

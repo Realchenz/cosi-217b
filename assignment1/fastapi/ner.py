@@ -21,7 +21,8 @@ class SpacyDocument:
     def get_entities(self) -> str:
         entities = []
         for e in self.doc.ents:
-            entities.append((e.start_char, e.end_char, e.label_, e.text))
+            # entities.append((e.start_char, e.end_char, e.label_, e.text))
+            entities.append((e.label_, e.text))
         return entities
 
     def get_entities_with_markup(self) -> str:
@@ -37,6 +38,13 @@ class SpacyDocument:
             buffer.write(char)
         markup = buffer.getvalue()
         return '<markup>%s</markup>' % markup
+    
+    def get_dep(self) -> str:
+        dependencies = []
+        for token in self.doc:
+            dependencies.append((token.text, token.dep_))
+        return dependencies
+
 
 
 if __name__ == '__main__':
