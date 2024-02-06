@@ -55,7 +55,7 @@ def index_post():
     dependency_info = []
     for sent in doc.doc.sents:
         sent_text = sent.text
-        sent_dependencies = [(token.text, token.dep_, token.head.text) for token in sent]
+        sent_dependencies = [(token.head.text, token.dep_, token.text) for token in sent]
         dependency_info.append({'sentence': sent_text, 'dependencies': sent_dependencies})
     
     return render_template('result2.html', markup=markup_paragraphed, dependency_info=dependency_info)
