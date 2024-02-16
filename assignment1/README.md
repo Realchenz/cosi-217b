@@ -50,7 +50,7 @@ spacy NER in a table
 
 dependency tree
 
-![dependency tree](./assets/Snipaste_2024-02-15_22-55-31.png)
+![dependency tree](./assets/Snipaste_2024-02-15_22-55-41.png)
 
 the bar chart of word frequencies
 
