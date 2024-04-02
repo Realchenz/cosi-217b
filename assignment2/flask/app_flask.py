@@ -37,6 +37,8 @@ def index_get():
 
 @app.post('/post')
 def index_post():
+    # clear the database
+    Dependency.query.delete()
     text = request.form['text']
     doc = ner.SpacyDocument(text)
     markup = doc.get_entities_with_markup()
@@ -60,7 +62,7 @@ def index_post():
     
     return render_template('result2.html', markup=markup_paragraphed, dependency_info=dependency_info)
 
-@app.route('/')
+@app.route('/database')
 def index():
     dependencies = Dependency.query.all()
     return render_template('result3.html', dependencies=dependencies)
