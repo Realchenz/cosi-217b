@@ -18,6 +18,7 @@ db = SQLAlchemy(app)
 
 class Dependency(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    entity = db.Column(db.String(100))
     head = db.Column(db.String(100))
     dependency = db.Column(db.String(100))
     token = db.Column(db.String(100))
@@ -27,8 +28,11 @@ with app.app_context():
 
 def add_dependencies(sent):
     for token in sent:
-        if token.ent_type_ or token.head.ent_type_:
-            dependency = Dependency(head=token.head.text, dependency=token.dep_, token=token.text)
+        if token.ent_type_:
+            dependency = Dependency(entity = token.text, head=token.head.text, dependency=token.dep_, token=token.text)
+            db.session.add(dependency)
+        if token.head.ent_type_:
+            dependency = Dependency(entity = token.head.text, head=token.head.text, dependency=token.dep_, token=token.text)
             db.session.add(dependency)
     db.session.commit()
 
