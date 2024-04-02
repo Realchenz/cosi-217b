@@ -22,6 +22,9 @@ class Dependency(db.Model):
     dependency = db.Column(db.String(100))
     token = db.Column(db.String(100))
 
+with app.app_context():
+    db.create_all()
+
 def add_dependencies(sent):
     for token in sent:
         dependency = Dependency(head=token.head.text, dependency=token.dep_, token=token.text)
@@ -57,7 +60,7 @@ def index_post():
     
     return render_template('result2.html', markup=markup_paragraphed, dependency_info=dependency_info)
 
-@app.get('/')
+@app.route('/')
 def index():
     dependencies = Dependency.query.all()
     return render_template('result3.html', dependencies=dependencies)
