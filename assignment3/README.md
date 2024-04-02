@@ -21,7 +21,13 @@ $ curl http://127.0.0.1:8000/dep?pretty=true -H "Content-Type: application/json"
 To build the Docker image, run the following command:
 
 ```
-docker run -d -p 8080:8080 my-fastapi-app
+docker build -t my-fastapi-app:latest .
+```
+
+To run the container app, run the following command:
+
+```
+docker run -d -p 8501:8501 --name my-fastapi-container my-fastapi-app
 ```
 
 
@@ -47,7 +53,13 @@ The results of the dependency parse are also presented and for each sentence one
 To build the Docker image, run the following command:
 
 ```
-docker run -d -p 5000:5000 my-flask-app
+docker build -t my-flask-app:latest .
+```
+
+To run the container app, run the following command:
+
+```
+docker run -d -p 8501:8501 --name my-flask-container my-flask-app
 ```
 
 ### streamlit
@@ -79,7 +91,13 @@ the bar chart of word frequencies
 To build the Docker image, run the following command:
 
 ```
-docker run -d -p 8501:8501 my-streamlit-app
+docker build -t my-streamlit-app:latest .
+```
+
+To run the container app, run the following command:
+
+```
+docker run -d -p 8501:8501 --name my-streamlit-container my-streamlit-app
 ```
 
 
