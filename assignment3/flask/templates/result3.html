@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependency List</title>
+</head>
+<body>
+    <h1>Entities and their heads</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Entities</th>
+                <th>Head</th>
+                <th>Dependency</th>
+                <th>Token</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dependency in dependencies %}
+            <tr>
+                <td>{{ dependency.token }}</td>
+                <td>{{ dependency.head }}</td>
+                <td>{{ dependency.dependency }}</td>
+                <td>{{ dependency.token }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
