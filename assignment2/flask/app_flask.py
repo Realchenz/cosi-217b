@@ -27,8 +27,9 @@ with app.app_context():
 
 def add_dependencies(sent):
     for token in sent:
-        dependency = Dependency(head=token.head.text, dependency=token.dep_, token=token.text)
-        db.session.add(dependency)
+        if token.ent_type_ or token.head.ent_type_:
+            dependency = Dependency(head=token.head.text, dependency=token.dep_, token=token.text)
+            db.session.add(dependency)
     db.session.commit()
 
 @app.get('/get')
